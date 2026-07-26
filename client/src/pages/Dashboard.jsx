@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../services/api";
 import PieChart from "../components/PieChart";
 import BarChart from "../components/BarChart";
 import "../styles/dashboard.css";
@@ -45,8 +45,7 @@ const Dashboard = () => {
 
       const token = localStorage.getItem("token");
 
-      const res = await axios.get(
-        "http://localhost:5000/api/transactions",
+      const res = await api.get("/transactions", 
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -129,8 +128,8 @@ const handleSave = async () => {
     const token = localStorage.getItem("token");
 
     if (isEditing) {
-      await axios.put(
-        `http://localhost:5000/api/transactions/${editId}`,
+      await api.put(
+    `/transactions/${editId}`,
         {
           ...transaction,
           amount: Number(transaction.amount),
@@ -144,8 +143,8 @@ const handleSave = async () => {
 
       alert("Transaction Updated Successfully");
     } else {
-      await axios.post(
-        "http://localhost:5000/api/transactions",
+      await api.post(
+    "/transactions",
         {
           ...transaction,
           amount: Number(transaction.amount),
@@ -178,9 +177,8 @@ const handleDelete = async (id) => {
   try {
 
     const token = localStorage.getItem("token");
-
-    await axios.delete(
-      `http://localhost:5000/api/transactions/${id}`,
+await api.delete(
+    `/transactions/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
