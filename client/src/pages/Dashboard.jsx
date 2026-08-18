@@ -4,6 +4,7 @@ import PieChart from "../components/PieChart";
 import BarChart from "../components/BarChart";
 import "../styles/dashboard.css";
 import { useNavigate } from "react-router-dom";
+import BillScanner from "../components/BillScanner";
 
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -166,6 +167,7 @@ const handleSave = async () => {
     alert(error.response?.data?.message || error.message);
   }
 };
+
 
 // =========================
 // DELETE TRANSACTION
@@ -411,6 +413,9 @@ setShowForm(true);
 >
 + Add Transaction
 </button>
+<BillScanner
+  fetchTransactions={fetchTransactions}
+/>
 
 </div>
 
